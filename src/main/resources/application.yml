@@ -1,0 +1,110 @@
+logging:
+  file: ./logs/log.log
+  #    max-size: 50
+  #    max-history: 7
+  level:
+    #        tk.mybatis: DEBUG
+    com:
+      jr:
+        service:
+          planokr: DEBUG
+          admin: DEBUG
+spring:
+  application:
+    name: ranlo-pro-dd
+    #  jackson:
+    #    date-format: yyyy-MM-dd HH:mm:ss
+    #    time-zone: GMT+8
+    #default-property-inclusion: non_null
+  datasource:
+    url: jdbc:mysql://localhost:3306/quartz?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true
+    username: root
+    password: root
+    # 使用druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    filters: stat
+    maxActive: 20
+    initialSize: 1
+    maxWait: 60000
+    minIdle: 1
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+  redis: #redis配置
+    database: 8
+    host: 114.80.96.64
+    port: 6379
+    password: Jr_4006550888
+    jedis:
+      pool:
+        max-idle: 500
+        min-idle: 50
+        max-active: 2000
+        max-wait: 1000
+    timeout: 3000
+
+mybatis:
+  configuration:
+    mapUnderscoreToCamelCase: true
+  basepackage: com.task.quartz.quartz
+  xmlLocation: classpath:mapper/*.xml
+  mapper-locations: "classpath*:mapper*/*.xml"
+
+server:
+  #  tomcat: #设置tomcat
+  #    max-threads: 10  #Tomcat可创建的最大的线程数，每一个线程处理一个请求；
+  #    min-spare-threads: 10 #最小备用线程数，tomcat启动时的初始化的线程数
+  port: 8888
+  servlet:
+    context-path: /api
+
+#pagehelper分页插件配置
+pagehelper:
+  helperDialect: mysql
+
+# 配置swagger
+swagger:
+  enabled: true
+  base-package: com.jr.service.*.controller
+  title: ranlo-pro-dd接口
+  version: 1.0.0.SNAPSHOT
+  description: ranloAPI接口文档
+  contact:
+    name: syz
+
+
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: '*'
+#  security:
+#    enabled: false
+
+#钉钉第三方应用参数配置
+dingding:
+  config:
+    corpId: ding28912615bd1ee020
+    SSOsecret: TnJa6ff2bVgMG0OzckrEHe7zD2NiRMFbWNMT1H1-c8rE3aH37_Lgt_iMLgTK3-Lm
+    suiteId: 6659010
+    appId: 27410
+    suiteKey: suitessumpkeicqh7wj4a
+    suiteSecret: VyualnsXP-CZciqiUes73nkk_ByVjmabA9q3L8Y-V-kiWji95XHsGqzcdfzv9639
+    encodingAesKey: r022mlcup5dxs2evq1di9ofqgk32qmtwb0u516cwhsk
+    callbackUrl: http://jr.free.idcfengye.com/callback
+    token: 123456
+    qrAppid: dingoatwvdl3yw7zzehhsc
+    qrAppSecret: ONCmIHDYNe9yYMA_zezT0pX2N45BP_T2A2ebKcB9S5Q3n0xlCUKArkHChRpMvHCF
+  api:
+    getSuiteTokenUrl: https://oapi.dingtalk.com/service/get_suite_token
+    getPermanentCodeUrl: https://oapi.dingtalk.com/service/get_permanent_code
+    activateSuiteUrl: https://oapi.dingtalk.com/service/activate_suite
+    getCorpTokenUrl: https://oapi.dingtalk.com/service/get_corp_token
+
+
